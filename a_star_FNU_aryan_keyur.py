@@ -14,49 +14,69 @@ closed_list = []                 # list to store the closed nodes
 
 
 '''
-Loop to define the obstacle points oin the map
+Loop to define the obstacle points in the map
 '''
+# C = input("Enter the clearance from the obstacle in pixel: ")
+# R = input("Enter the radius of the robot in pixel: ")
+C = 5
+R = 5
+T = C + R
+
 for y in range(500):
     for x in range(1200):
         canvas[y,x] = [255,255,255]
-        if (0<=y<=5):                      # points in the bottom boundary
+        if (0<=y<=T):                      # points in the bottom boundary
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             node_grid[x][y] = -1
-        elif (0<=x<=5):                   # points in the left boundary
+        elif (0<=x<=T):                   # points in the left boundary
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             node_grid[x][y] = -1
-        elif (495<=y<500):                 # points in the top boundary
+        elif (500-T<=y<500):                 # points in the top boundary
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             node_grid[x][y] = -1
-        elif (1195<=x<1200):               # points in the right boundary
+        elif (1200-T<=x<1200):               # points in the right boundary
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             node_grid[x][y] = -1
-        elif (95<=x<=180) and (95<=y<500):         # points in first rectangle
+        elif (100-T<=x<=175+T) and (100-T<=y<500):         # points in first rectangle
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             node_grid[x][y] = -1
-        elif (270<=x<=355 and 0<=y<=405):          # points in second rectangle
+        elif (275-T<=x<=350+T and 0<=y<=400+T):          # points in second rectangle
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             node_grid[x][y] = -1
         
         # Points int the C-shaped obstacle
-        elif (895<=x<=1020) and (45<=y<=130):
+        elif (900-T<=x<=1015+T) and (50-T<=y<=125+T):
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             node_grid[x][y] = -1
-        elif (1015<=x<1105 and 45<=y<=455):
+        elif (1020-T<=x<1100+T and 50-T<=y<=450+T):
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             node_grid[x][y] = -1
-        elif (895<=x<=1020 and 370<=y<=455):
+        elif (900-T<=x<=1015+T and 375-T<=y<=450+T):
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             node_grid[x][y] = -1
+
+        # # Points in the hexagon obstacle
+        # elif(520-T<=x<=780+T) and (175-T<=y<=325+T):
+        #     obstacle_set.add((x,y))
+        #     obstacle_list.append((x,y))
+        #     node_grid[x][y] = -1
+        # elif(325+T<=y<=400+T) and (-y+(325+T)+(75/(130+T))*(x-520+T)>=0) and (-y+(325+T)+(75/(T-130))*(x-780+T)>=0):
+        #     obstacle_set.add((x,y))
+        #     obstacle_list.append((x,y))
+        #     node_grid[x][y] = -1
+        # elif(95<=y<=170) and (-75*x-135*y+61575<=0) and (-75*x+135*y+35925>=0):
+        #     obstacle_set.add((x,y))
+        #     obstacle_list.append((x,y))
+        #     node_grid[x][y] = -1
 
         # Points in the hexagon obstacle
         elif(515<=x<=785) and (170<=y<=330):
@@ -89,6 +109,7 @@ pts = np.array([[650, 400], [780, 325],
                 np.int32)
 canvas = cv2.fillPoly(canvas, [np.array(pts)], color=(0, 0, 255))
 
+cv2.flip(canvas,0)
 cv2.imshow("A star",canvas)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
