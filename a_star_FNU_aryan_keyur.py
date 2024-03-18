@@ -3,6 +3,7 @@
 import cv2
 import numpy as np
 import heapq as hq
+import math
 
 canvas = np.ones((500,1200,3))   # creating a frame for video generation
 obstacle_set = set()             # set to store the obstacle points
@@ -18,6 +19,69 @@ Loop to define the obstacle points in the map
 '''
 # C = input("Enter the clearance from the obstacle in pixel: ")
 # R = input("Enter the radius of the robot in pixel: ")
+
+
+x_goal = 0
+y_goal = 0
+x_start = 0
+y_start = 0
+
+def move_forward(node):
+    new_heading = node[5]
+    x = node[4][0] + L*np.cos(np.deg2rad(new_heading))
+    y = node[4][1] + L*np.sin(np.deg2rad(new_heading))
+    x = round(x)
+    y = round(y)
+    c2c = node[1]+L
+    c2g = math.sqrt((y_goal-y)**2 + (x_goal-x)**2)
+    Tc = c2c + c2g
+    return (x,y),new_heading,Tc,c2c
+
+
+def move_30(node):
+    new_heading = (node[5] + 30) % 360
+    x = node[4][0] + L*np.cos(np.deg2rad(new_heading))
+    y = node[4][1] + L*np.sin(np.deg2rad(new_heading))
+    x = round(x)
+    y = round(y)
+    c2c = node[1]+L
+    c2g = math.sqrt((y_goal-y)**2 + (x_goal-x)**2)
+    Tc = c2c + c2g
+    return (x,y),new_heading,Tc,c2c
+
+def move_minus_30(node):
+    new_heading = (node[5] - 30) % 360
+    x = node[4][0] + L*np.cos(np.deg2rad(new_heading))
+    y = node[4][1] + L*np.sin(np.deg2rad(new_heading))
+    x = round(x)
+    y = round(y)
+    c2c = node[1]+L
+    c2g = math.sqrt((y_goal-y)**2 + (x_goal-x)**2)
+    Tc = c2c + c2g
+    return (x,y),new_heading,Tc,c2c
+
+def move_60(node):
+    new_heading = (node[5] + 60) % 360
+    x = node[4][0] + L*np.cos(np.deg2rad(new_heading))
+    y = node[4][1] + L*np.sin(np.deg2rad(new_heading))
+    x = round(x)
+    y = round(y)
+    c2c = node[1]+L
+    c2g = math.sqrt((y_goal-y)**2 + (x_goal-x)**2)
+    Tc = c2c + c2g
+    return (x,y),new_heading,Tc,c2c
+
+def move_minus_60(node):
+    new_heading = (node[5] - 60) % 360
+    x = node[4][0] + L*np.cos(np.deg2rad(new_heading))
+    y = node[4][1] + L*np.sin(np.deg2rad(new_heading))
+    x = round(x)
+    y = round(y)
+    c2c = node[1]+L
+    c2g = math.sqrt((y_goal-y)**2 + (x_goal-x)**2)
+    Tc = c2c + c2g
+    return (x,y),new_heading,Tc,c2c
+
 C = 5
 R = 5
 T = C + R
@@ -92,6 +156,70 @@ for y in range(500):
             obstacle_list.append((x,y))
             node_grid[x][y] = -1
 
+valid_start = False
+
+while not valid_start:
+        x_start = int(input("Enter the start x coordinate: "))
+        y_start = int(input("Enter the start y coordinate: "))
+        theta_start = int(input("Enter the initial heading: "))
+        if (x_start, y_start) in obstacle_set:
+            print("Invalid coordinates, Enter again: ")
+        else:
+            initial_node = (0,0, 1, [], (x_start, y_start), theta_start)
+            valid_start = True
+
+print(initial_node)
+valid_goal = False
+
+while not valid_goal:
+        x_goal = int(input("Enter the goal x coordinate: "))
+        y_goal = int(input("Enter the goal y coordinate: "))
+        theta_goal = int(input("Enter the goal heading: "))
+        if (x_goal, y_goal) in obstacle_set:
+            print("Invalid coordinates, Enter again: ")
+        else:
+            goal = (x_goal, y_goal)
+            valid_goal = True
+
+valid_step = False
+
+while not valid_step:
+        L = int(input("Enter step size: "))
+        if not (1 <= L <= 10):
+            print("Invalid Step Size, Enter Again: ")
+        else:
+            valid_step = True
+
+
+# move_30(initial_node)
+(x,y),c2c,c2g = move_30(initial_node)
+print((x,y))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Mark the obstacle points in the frame, including points after bloating
 for point in obstacle_list:
@@ -113,3 +241,6 @@ cv2.flip(canvas,0)
 cv2.imshow("A star",canvas)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+
+
