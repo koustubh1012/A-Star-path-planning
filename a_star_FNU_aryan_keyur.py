@@ -15,7 +15,7 @@ c2c_node_grid = [[float('inf')] * 500 for _ in range(1200)]       # create a 2D 
 tc_node_grid = [[float('inf')] * 500 for _ in range(1200)]        # create a 2D array for storing cost to come
 closed_set = set()               # set to store the value of visited and closed points
 closed_list = []                 # list to store the closed nodes
-hq.heapify(closed_list)
+# hq.heapify(closed_list)
 visited={}
 '''
 Loop to define the obstacle points in the map
@@ -301,8 +301,6 @@ while(open_list):
             new_node = (tc, c2c, new_index, new_parent_index, point, new_heading)
             hq.heappush(open_list, new_node)                            # push the new node to the open list
 
-print(node)
-
 
 
 
@@ -342,10 +340,10 @@ Loop to mark the explored nodes in order on the frame
 '''
 print("Exploring map")
 
-while closed_list:
-    node=hq.heappop(closed_list)
+# while closed_list:
+for node in closed_list:
+    # node=hq.heappop(closed_list)
     canvas[node[4][1], node[4][0]] = [0, 255, 0]
-    
     counter +=1
     if counter%500 == 0 or counter == 0:
         canvas_flipped = cv2.flip(canvas,0)
