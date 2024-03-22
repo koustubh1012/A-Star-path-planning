@@ -391,5 +391,3 @@ video_writer.release()
 # cv2.destroyAllWindows()
 end_time = time.time()
 print(f"The runtime of my program is {end_time - start_time} seconds.")
-
-
