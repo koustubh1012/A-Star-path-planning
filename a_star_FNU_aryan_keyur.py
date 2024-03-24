@@ -1,3 +1,9 @@
+#ENPM 661: Planning for Robotics
+#Project 3 - Phase 1
+#authors: Keyur Borad, Aryan Mishra, FNU Koustubh
+
+
+
 # import libraries
 
 import cv2
