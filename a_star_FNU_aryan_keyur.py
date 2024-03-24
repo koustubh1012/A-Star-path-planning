@@ -212,7 +212,7 @@ while(open_list):
 
     node_dist = math.sqrt((node[4][0]-x_goal)**2 + (node[4][1]-y_goal)**2)
     
-    if node_dist<1.5 and (abs(node[5]-theta_goal)<=30 or abs(theta_goal-node[5])<=30):                # if the node is goal position, exit the loop
+    if node_dist<3 and (abs(node[5]-theta_goal)<=30 or abs(theta_goal-node[5])<=30):                # if the node is goal position, exit the loop
         print("Goal reached")
         break
 
