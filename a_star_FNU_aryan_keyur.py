@@ -16,11 +16,12 @@ tc_node_grid = [[float('inf')] * 500 for _ in range(1200)]        # create a 2D 
 closed_set = []               # set to store the value of visited and closed points                 
 closed_list = np.zeros((1200, 500, 12))
 visited={}
+
 '''
 Loop to define the obstacle points in the map
 '''
-# C = input("Enter the clearance from the obstacle in pixel: ")
-# R = input("Enter the radius of the robot in pixel: ")
+C = int(input("Enter the clearance from the obstacle in pixel: "))     # Get clearance from the user
+R = int(input("Enter the radius of the robot in pixel: "))             # Get the robot radius from user
 
 
 x_goal = 0
@@ -28,6 +29,7 @@ y_goal = 0
 x_start = 0
 y_start = 0
 
+# Funtion to update the visted nodes
 def visited_node(node):
     visited.update({node[2]:node[4]})
 
@@ -89,8 +91,6 @@ def move_minus_60(node):
     tc = c2c + c2g
     return (x,y),new_heading,tc,c2c
 
-C = 5
-R = 5
 T = C + R
 
 for y in range(500):
@@ -145,17 +145,17 @@ for y in range(500):
             tc_node_grid[x][y] = -1
 
         # Points in the hexagon obstacle
-        elif(515<=x<=785) and (170<=y<=330):
+        elif(520-T<=x<=780+T) and (175<=y<=325):
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             c2c_node_grid[x][y] = -1
             tc_node_grid[x][y] = -1
-        elif(330<=y<=405) and (-75*x+135*y-5925<=0) and (-75*x-135*y+103425>=0):
+        elif(325<=y<=400+T) and ((((y-400-T)*(520-T-650)/(325-400-T))-(x-650))<=0) and ((((y-400-T)*(780+T-650)/(325-400-T))-(x-650))>=0):
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             c2c_node_grid[x][y] = -1
             tc_node_grid[x][y] = -1
-        elif(95<=y<=170) and (-75*x-135*y+61575<=0) and (-75*x+135*y+35925>=0):
+        elif(100-T<=y<=175) and ((((y-175)*(650-520+T)/(100-T-175))-(x-520+T)))<=0 and ((((y-175)*(650-780-T)/(100-T-175))-(x-780-T))>=0):
             obstacle_set.add((x,y))
             obstacle_list.append((x,y))
             c2c_node_grid[x][y] = -1
