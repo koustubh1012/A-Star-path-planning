@@ -156,13 +156,13 @@ for y in range(500):                                       # loop to define the 
             obstacle_list.append((x,y))                    # add the points to the obstacle list
             c2c_node_grid[x][y] = -1                       # mark the points in the cost to come grid with -1
             tc_node_grid[x][y] = -1                        # mark the points in the total cost grid with -1
-        elif(325<=y<=400+T) and ((((y-400-T)*(520-T-650)/(325-400-T))-(x-650))<=0) and ((((y-400-T)*(780+T-650)/(325-400-T))-(x-650))>=0):
+        elif(325<=y<=400+T) and (y+0.577*x-775.05-(T/math.sin(np.deg2rad(60)))<=0) and (y-0.577*x-24.95-(T/math.sin(np.deg2rad(60)))<=0) and (520-T<=x<=780+T):
             # points in the hexagon obstacle above the center
             obstacle_set.add((x,y))                        # add the points to the obstacle set
             obstacle_list.append((x,y))                    # add the points to the obstacle list
             c2c_node_grid[x][y] = -1                       # mark the points in the cost to come grid with -1
             tc_node_grid[x][y] = -1                        # mark the points in the total cost grid with -1
-        elif(100-T<=y<=175) and ((((y-175)*(650-520+T)/(100-T-175))-(x-520+T)))<=0 and ((((y-175)*(650-780-T)/(100-T-175))-(x-780-T))>=0):
+        elif(100-T<=y<=175) and (y+0.577*x-475.05+(T/math.sin(np.deg2rad(60))))>=0 and (y-0.577*x+275.05+(T/math.sin(np.deg2rad(60)))>=0) and (520-T<=x<=780+T):
             # points in the hexagon obstacle below the center
             obstacle_set.add((x,y))                        # add the points to the obstacle set
             obstacle_list.append((x,y))                    # add the points to the obstacle list
