@@ -6,6 +6,13 @@
 - Aryan Mishra (amishr17@umd.edu)
 - FNU Koustubh (koustubh@umd.edu)
 
+### Library used:
+- cv2
+- Numpy
+- heapq
+- math
+- time
+
 ### Instructions to Run the Code:
 1. Download the package and navigate to your directory.
     ```
