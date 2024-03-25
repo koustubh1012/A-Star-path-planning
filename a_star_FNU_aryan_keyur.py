@@ -12,7 +12,6 @@ import heapq as hq
 import math
 import time
 
-start_time = time.time()  
 canvas = np.ones((501,1201,3))   # creating a frame for video generation
 obstacle_set = set()             # set to store the obstacle points
 obstacle_list = []               # list to store the obstacle points in order for videp
@@ -201,6 +200,7 @@ while not valid_step:                                                          #
             print("Invalid Step Size, Enter Again: ")                          # print error message
         else:
             valid_step = True                                                  # set the flag to true
+start_time = time.time()  
 new_index = 1         
 open_list = []
 hq.heappush(open_list,initial_node)        # Push initial node to the list
@@ -297,8 +297,7 @@ while(open_list):
     # print(open_list)
     # break
 
-print(node[4])
-print(node[5])
+print("The Robot reached at ", node[4],"with orientation ",node[5]," degrees")
 
 # Mark the obstacle points in the frame, including points after bloating
 for point in obstacle_list:                            # loop to mark the obstacle points
@@ -325,7 +324,7 @@ path = node[3]            # Get the parent node list
 counter = 0               # counter to count the frames to write on video
 
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Codec for MP4 format
-video_writer = cv2.VideoWriter('output.mp4', fourcc, 60, (1200, 500)) # Video writer object
+video_writer = cv2.VideoWriter('A_Star_output.mp4', fourcc, 60, (1200, 500)) # Video writer object
 
 '''
 Loop to mark the explored nodes in order on the frame
