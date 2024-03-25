@@ -2,9 +2,9 @@
 ## PROJECT 3 - PHASE 1
 
 ### Authors:
-- Keyur Borad (kborad@umd.edu)
-- Aryan Mishra (amishr17@umd.edu)
-- FNU Koustubh (koustubh@umd.edu)
+- Keyur Borad (kborad@umd.edu)- 120426049
+- Aryan Mishra (amishr17@umd.edu)- 120106521
+- FNU Koustubh (koustubh@umd.edu)- 120273755
 
 ### Library used:
 - cv2
