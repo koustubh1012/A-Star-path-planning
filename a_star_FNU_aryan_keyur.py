@@ -2,7 +2,7 @@
 #Project 3 - Phase 1
 #authors: Keyur Borad, Aryan Mishra, FNU Koustubh
 
-Git Hub link: https://github.com/koustubh1012/A-Star-path-planning
+# Git Hub link: https://github.com/koustubh1012/A-Star-path-planning
 
 # import libraries
 
